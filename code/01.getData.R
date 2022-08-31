@@ -22,4 +22,4 @@ na_count <-sapply(dfSel, function(y) sum(length(which(is.na(y)))))
 table(dfSel$YEAR)
 
 ## export
-
+write.csv(dfSel, file = "data/ACL_data.csv")
