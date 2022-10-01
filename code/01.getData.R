@@ -8,7 +8,7 @@ df <- bib2df("data/anthology+abstracts.bib")
 glimpse(df)
 
 # filter
-subset <- dfSel[ , c("TITLE", "ABSTRACT")]
+# subset <- dfSel[ , c("TITLE", "ABSTRACT")]
 
 dfSel <- df %>% 
   select(YEAR, TITLE, ABSTRACT, AUTHOR, PUBLISHER, BOOKTITLE, CATEGORY)  %>% 
