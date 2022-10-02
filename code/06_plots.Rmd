@@ -1,0 +1,35 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data = read_csv('data/topic_distribution_year.csv', skip = 1) %>% 
+  select(-'...1') %>% 
+  rename(year = '...2', topic = '...3')%>% 
+  mutate( topic = as.character(topic)) 
+
+
+```
+
+```{r}
+data %>% 
+  ggplot(aes(year, mean, color = topic))+ 
+  geom_line()
+```
+```{r}
+data %>% 
+  ggplot(aes(year, median, color = topic))+ 
+  geom_line()
+```
+```{r}
+data %>% 
+  ggplot(aes(year, count, color = topic))+ 
+  geom_line()
+```
+
