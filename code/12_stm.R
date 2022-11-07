@@ -177,6 +177,7 @@ plot(prep, "YEAR",
      # xlab = "Time (2008)"
      )
 
-mod.out.corr <- topicCorr(model_sel)
+mod.out.corr <- topicCorr(model_sel, cutoff = 0.001,
+                          method = "huge")
 plot(mod.out.corr)
 
