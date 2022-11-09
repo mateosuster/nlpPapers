@@ -1,0 +1,160 @@
+Topic 1 Top Words:
+ 	 Highest Prob: report, program, international, conference, computer, programs, national 
+ 	 FREX: conference, editor, register, afips, army, program, acl 
+ 	 Lift: afips, ifip, aaas, acm, ajcl, asis, atkinson 
+ 	 Score: report, program, conference, international, acl, programs, editor 
+Topic 2 Top Words:
+ 	 Highest Prob: generation, text, document, documents, sentences, sentence, summarization 
+ 	 FREX: summarization, summaries, summary, abstractive, slot, document, documents 
+ 	 Lift: abstractiveness, billsum, compressive, govreport, icsi, keyphrase, lmtc 
+ 	 Score: summarization, summaries, generation, document, documents, summary, abstractive 
+Topic 3 Top Words:
+ 	 Highest Prob: research, scientific, computational, linguistics, reports, paper, literature 
+ 	 FREX: negation, section, poetry, anaphora, students, bridging, scope 
+ 	 Lift: bioscope, cocosda, executives, investors, scansion, negation, biennial 
+ 	 Score: scientific, students, linguistics, papers, reports, negation, section 
+Topic 4 Top Words:
+ 	 Highest Prob: bias, gender, video, biases, data, participants, multimodal 
+ 	 FREX: biases, gestures, debiasing, facial, gender, gaze, bias 
+ 	 Lift: debiasing, nonmanual, phonation, stereotypes, animation, artworks, aural 
+ 	 Score: bias, gender, video, biases, multimodal, gestures, fairness 
+Topic 5 Top Words:
+ 	 Highest Prob: knowledge, extraction, entity, entities, relation, named, information 
+ 	 FREX: entity, entities, named, coreference, extraction, event, ner 
+ 	 Lift: ned, entity, aliases, barack, biorelex, confine, coreferring 
+ 	 Score: entity, entities, event, knowledge, named, relation, extraction 
+Topic 6 Top Words:
+ 	 Highest Prob: social, media, medical, clinical, health, users, twitter 
+ 	 FREX: clinical, health, disease, depression, symptoms, suicide, posts 
+ 	 Lift: bullies, cepr, comorbidity, contextualize, counties, distressed, health 
+ 	 Score: social, media, clinical, health, medical, posts, twitter 
+Topic 7 Top Words:
+ 	 Highest Prob: speech, recognition, spoken, asr, automatic, speakers, database 
+ 	 FREX: prosody, asr, disfluency, lyrics, telephone, transcribed, disfluencies 
+ 	 Lift: lvcsr, lyrics, acoustical, adaba, adolescent, albayzin, alcohol 
+ 	 Score: speech, asr, spoken, recognition, acoustic, transcription, speaker 
+Topic 8 Top Words:
+ 	 Highest Prob: task, system, shared, paper, score, best, systems 
+ 	 FREX: subtask, shared, subtasks, submitted, submission, team, submissions 
+ 	 Lift: adi, amobee, augenstein, bertforsequenceclassification, bertweet, bhanodaig, cecl 
+ 	 Score: task, shared, subtask, system, submission, submitted, submissions 
+Topic 9 Top Words:
+ 	 Highest Prob: syntactic, parsing, structure, dependency, semantic, parser, structures 
+ 	 FREX: dependency, amr, treebanks, constituency, srl, nodes, syntactic 
+ 	 Lift: begum, blex, bunsetsus, conj, conjuncts, conversions, desr 
+ 	 Score: dependency, parsing, syntactic, parser, treebank, trees, tree 
+Topic 10 Top Words:
+ 	 Highest Prob: data, training, learning, domain, method, performance, methods 
+ 	 FREX: training, supervised, train, trained, domains, data, labeled 
+ 	 Lift: hrls, lrl, uda, ada, xmc, delexicalization, lrls 
+ 	 Score: data, training, domain, learning, trained, supervised, labeled 
+Topic 11 Top Words:
+ 	 Highest Prob: translation, machine, system, systems, nmt, translations, source 
+ 	 FREX: nmt, smt, reordering, translation, moses, wmt, iwslt 
+ 	 Lift: hybridization, nmt, pbsmt, reordering, simt, aachen, afrl 
+ 	 Score: translation, nmt, machine, smt, translations, bleu, iwslt 
+Topic 12 Top Words:
+ 	 Highest Prob: des, les, une, nous, dans, pour, sur 
+ 	 FREX: des, les, une, nous, dans, pour, sur 
+ 	 Lift: abord, agit, approches, appuyant, celles, celui, certaines 
+ 	 Score: les, des, une, nous, dans, pour, sur 
+Topic 13 Top Words:
+ 	 Highest Prob: terms, term, functions, function, list, time, subject 
+ 	 FREX: entropy, quantity, terms, term, functions, job, subject 
+ 	 Lift: amusing, awe, smoking, ads, employers, graders, nuggets 
+ 	 Score: terms, term, personality, entropy, functions, subject, job 
+Topic 14 Top Words:
+ 	 Highest Prob: evaluation, human, quality, systems, automatic, metrics, evaluate 
+ 	 FREX: metrics, metric, evaluation, evaluating, measures, judgments, evaluations 
+ 	 Lift: adem, gleu, lcsr, thumb, voss, summeval, metric 
+ 	 Score: evaluation, metrics, human, quality, metric, measures, measure 
+Topic 15 Top Words:
+ 	 Highest Prob: algorithm, grammar, rules, grammars, constraints, paper, language 
+ 	 FREX: grammars, grammar, algorithm, rule, constraints, rules, logic 
+ 	 Lift: apriori, archtran, automata, backtracking, calculi, categorial, cfgs 
+ 	 Score: grammar, grammars, algorithm, rules, parsing, logical, ccg 
+Topic 16 Top Words:
+ 	 Highest Prob: language, data, resources, tools, web, processing, development 
+ 	 FREX: infrastructure, tools, technologies, software, interface, technology, tutorial 
+ 	 Lift: adobe, annex, atom, attendees, authorization, aventinus, catalogued 
+ 	 Score: tools, resources, project, web, language, data, software 
+Topic 17 Top Words:
+ 	 Highest Prob: user, style, aspect, content, text, reviews, aspects 
+ 	 FREX: explanations, product, reviews, author, authorship, explanation, causal 
+ 	 Lift: explanations, adjustable, anonymize, ars, attacker, authorship, canaries 
+ 	 Score: reviews, style, product, explanations, attributes, aspect, causal 
+Topic 18 Top Words:
+ 	 Highest Prob: model, neural, models, network, attention, propose, show 
+ 	 FREX: recurrent, sequence, neural, network, networks, attention, model 
+ 	 Lift: bash, buffer, emission, equation, lrp, mlns, mwps 
+ 	 Score: neural, model, network, sequence, networks, models, outperforms 
+Topic 19 Top Words:
+ 	 Highest Prob: dialogue, user, system, dialog, systems, responses, response 
+ 	 FREX: dialog, responses, intents, conversation, chatbots, dialogue, chatbot 
+ 	 Lift: persona, vln, adventure, alfred, alime, atari, bargaining 
+ 	 Score: dialogue, dialog, responses, conversation, conversational, response, agents 
+Topic 20 Top Words:
+ 	 Highest Prob: semantic, lexical, sense, wordnet, relations, paper, concepts 
+ 	 FREX: synsets, wordnets, ontological, ontology, verbs, wsd, verb 
+ 	 Lift: bfn, bond, cili, constructicon, dannet, dicoinfo, distributive 
+ 	 Score: wordnet, semantic, ontology, sense, verbs, senses, verb 
+Topic 21 Top Words:
+ 	 Highest Prob: corpus, annotation, annotated, corpora, annotations, paper, present 
+ 	 FREX: annotation, annotators, annotated, corpus, guidelines, annotations, scheme 
+ 	 Lift: arrau, bunt, cleared, dad, extents, macrosyntactic, mannheim 
+ 	 Score: annotation, corpus, annotated, corpora, annotations, annotators, agreement 
+Topic 22 Top Words:
+ 	 Highest Prob: language, study, analysis, linguistic, find, different, may 
+ 	 FREX: suggest, change, find, extent, differences, effect, examine 
+ 	 Lift: culprit, eluding, fmri, npi, scrambled, sdm, sprung 
+ 	 Score: study, linguistic, find, differences, patterns, language, probing 
+Topic 23 Top Words:
+ 	 Highest Prob: word, words, embeddings, representations, method, semantic, similarity 
+ 	 FREX: vectors, embeddings, embedding, similarity, vector, representations, spaces 
+ 	 Lift: atoms, bwe, rae, riemannian, tabsa, towe, ate 
+ 	 Score: word, embeddings, representations, similarity, embedding, words, vector 
+Topic 24 Top Words:
+ 	 Highest Prob: languages, language, english, multilingual, parallel, corpora, alignment 
+ 	 FREX: alignment, parallel, monolingual, multilingual, languages, bilingual, spanish 
+ 	 Lift: accurat, amara, bitextor, bwes, czeng, guarani, halves 
+ 	 Score: languages, parallel, multilingual, english, alignment, bilingual, monolingual 
+Topic 25 Top Words:
+ 	 Highest Prob: detection, sentiment, classification, analysis, dataset, emotion, tweets 
+ 	 FREX: emotion, sarcasm, hate, abusive, polarity, emotions, detection 
+ 	 Lift: abandon, counterspeech, exclusivity, gay, hatecheck, lesbian, pejorative 
+ 	 Score: sentiment, detection, emotion, tweets, sarcasm, offensive, emotions 
+Topic 26 Top Words:
+ 	 Highest Prob: morphological, words, lexicon, word, tagging, segmentation, dictionary 
+ 	 FREX: morphological, morphology, mwe, inflectional, hebrew, morphologically, inflected 
+ 	 Lift: agglutinative, allomorphic, allomorphs, ancestors, autosegmental, derinet, esperanto 
+ 	 Score: morphological, lexicon, segmentation, dictionaries, tagging, pos, morphology 
+Topic 27 Top Words:
+ 	 Highest Prob: models, tasks, language, model, performance, bert, datasets 
+ 	 FREX: plms, pretraining, masked, pretrained, adversarial, lms, bert 
+ 	 Lift: agnews, arlue, backdoor, codexglue, compromises, degenerates, discoeval 
+ 	 Score: models, bert, tasks, adversarial, pretrained, transformer, pretraining 
+Topic 28 Top Words:
+ 	 Highest Prob: news, discourse, topic, topics, articles, argument, coherence 
+ 	 FREX: discourse, argumentation, argumentative, connectives, topic, stories, fake 
+ 	 Lift: fallacies, anecdote, argumentative, argumentativeness, asher, biodrb, changemyview 
+ 	 Score: discourse, news, topic, argument, story, topics, argumentation 
+Topic 29 Top Words:
+ 	 Highest Prob: arabic, texts, chinese, error, errors, text, language 
+ 	 FREX: learners, gec, msa, learner, errors, proficiency, dialects 
+ 	 Lift: csc, sorani, adolescence, ali, arabizi, arabs, bambara 
+ 	 Score: arabic, errors, chinese, error, correction, gec, texts 
+Topic 30 Top Words:
+ 	 Highest Prob: question, questions, dataset, answering, answer, retrieval, reasoning 
+ 	 FREX: answering, answer, answers, reasoning, mrc, question, commonsense 
+ 	 Lift: bookqa, faq, mctest, openbookqa, sqs, wsc, distractors 
+ 	 Score: question, questions, answering, answer, reasoning, answers, query 
+Topic 31 Top Words:
+ 	 Highest Prob: textual, visual, image, wikipedia, article, descriptions, multimodal 
+ 	 FREX: images, descriptions, captions, visual, objects, captioning, spatial 
+ 	 Lift: caption, breaker, captions, cartoons, clicking, clutter, digging 
+ 	 Score: image, visual, images, wikipedia, multimodal, descriptions, article 
+Topic 32 Top Words:
+ 	 Highest Prob: results, features, using, approach, different, feature, use 
+ 	 FREX: features, feature, results, techniques, combination, strategies, combining 
+ 	 Lift: automl, reputation, defence, verta, minimalistic, features, eeg 
+ 	 Score: features, results, feature, approach, using, different, strategies 

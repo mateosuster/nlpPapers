@@ -1,0 +1,33 @@
+Topics , Modelo 1 (init spectral, covariates gender & year
+1 Conferences
+2 Summarization (text generation)
+3 Computational linguistics
+4 Bias studies (human interactions)
+5 NER
+6 Social media
+7 Speech recognition
+8 Systems & Tasks 
+9 Sintaxis 
+10 General ML
+11 Machine Translation
+12 Frances
+13 Term/functions
+14 Model evaluation
+15 Grammar
+16 Tools & technologies
+17 Machine Comprehension
+18 Neural Network
+19 Dialogue system
+20 Semantic 
+21 Corpus
+22 Language analysis
+23 Word embeddings
+24 Multilingual
+25 Sentiment analysis
+26 Morphological
+27 Pre-trained language models (PLMs)
+28 Discourse & news
+29 Arabic & chinese
+30 Question answering
+31 Multimodal
+32 Features

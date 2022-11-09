@@ -1,0 +1,304 @@
+---
+title: "LDA papers - STM"
+output: html_notebook
+---
+# Dependencies
+```{r}
+#limpio la memoria
+rm( list=ls() )  #Borro todos los objetos
+gc()   #Garbage Collection
+
+library(stm)
+library(tm)
+
+semilla = 420
+set.seed(semilla)
+
+data <- read.csv("data/data_gender_abstract_year.csv")
+table(data$gender_final)
+```
+# Data
+```{r}
+#selected colums
+sel_col = c('YEAR'  ,   'ABSTRACT', 'gender_final'  )
+
+#sampling
+paper_sample = nrow(data[data$YEAR == 2016,] )
+data_sample = data[data$YEAR < 2016, sel_col]
+
+
+for (i in seq(2016, 2022)){
+  data_i = data[data$YEAR == i, sel_col]
+  data_i = data_i[sample(nrow(data_i)  , paper_sample),]
+  data_sample = rbind(data_sample, data_i)
+  
+}
+
+# data_sample =data_sample[sample(nrow(data_sample)  , 1000),]
+
+# Double-check format
+sapply(data_sample, typeof)
+```
+# Ingestion
+```{r}
+# PROCESS
+## SAMPLE
+#### * default parameters
+processed <- textProcessor(data_sample$ABSTRACT, metadata = data_sample,
+                           lowercase = TRUE, #*
+                           removestopwords = TRUE, #*
+                           removenumbers = TRUE, #*
+                           removepunctuation = TRUE, #*
+                           stem = FALSE, #*
+                           wordLengths = c(3,Inf), #*
+                           sparselevel = 1, #*
+                           language = "en", #*
+                           verbose = TRUE, #*
+                           onlycharacter = FALSE, # not def
+                           striphtml = FALSE, #*
+                           customstopwords = NULL, #*
+                           v1 = FALSE) #*
+
+out <- prepDocuments(processed$documents, processed$vocab, processed$meta)
+docs <- out$documents
+vocab <- out$vocab
+meta <- out$meta
+```
+
+
+```{r}
+## ALL DATA
+processed_all <- textProcessor(data$ABSTRACT, metadata = data,
+                           lowercase = TRUE, #*
+                           removestopwords = TRUE, #*
+                           removenumbers = TRUE, #*
+                           removepunctuation = TRUE, #*
+                           stem = FALSE, #*
+                           wordLengths = c(3,Inf), #*
+                           sparselevel = 1, #*
+                           language = "en", #*
+                           verbose = TRUE, #*
+                           onlycharacter = FALSE, # not def
+                           striphtml = FALSE, #*
+                           customstopwords = NULL, #*
+                           v1 = FALSE) #*
+
+out_all <- prepDocuments(processed_all$documents, 
+                         processed_all$vocab, processed_all$meta)
+docs_all <- out_all$documents
+vocab_all <- out_all$vocab
+meta_all <- out_all$meta
+```
+# Estimate
+```{r}
+#experiments
+k = 32
+
+# start_time <- Sys.time()
+# model_prev_spectral <- stm(documents = out$documents, vocab = out$vocab,
+#                       K = k,
+#                       # prevalence = ~gender_final ,
+#                       prevalence = ~gender_final + s(YEAR) ,
+#                       # content = ~gender_final + s(YEAR) ,
+#                       # content = ~gender_final,
+#                       max.em.its = 100, #75
+#                       data = out$meta, 
+#                       init.type = "Spectral",
+#                       seed = semilla)
+# end_time <- Sys.time()
+# time_execution_2 <- end_time - start_time
+# print(time_execution_2)
+
+start_time <- Sys.time()
+model_prev_cont_spectral <- stm(documents = out$documents, vocab = out$vocab,
+                      K = k,
+                      prevalence = ~ s(YEAR) ,
+                      content = ~gender_final,
+                      max.em.its = 100, #75
+                      data = out$meta, 
+                      init.type = "Spectral",
+                      seed = semilla)
+end_time <- Sys.time()
+time_execution_3 <- end_time - start_time
+
+
+print(time_execution_2)
+print(time_execution_3)
+
+
+```
+
+```{r}
+# model selection
+model_sel = model_prev_spectral
+# model_sel = model_prev_cont_spectral
+```
+
+# Visualize
+## Topic proportion
+
+```{r}
+# Topic  proportion
+
+##labels
+labels <- read.csv("../results/stm_topics.txt")
+
+# Display Expected Topic Proportions
+topicNames<-c("Topic 1","Topic 2","Topic 3","Topic 4","Topic 5","Topic 6",
+          "Topic 7","Topic 8","Topic 9","Topic 10","Topic 11","Topic 12",
+          "Topic 13","Topic 14","Topic 15","Topic 16","Topic 17",
+          "Topic 18","Topic 19","Topic 20")
+
+par(bty="n",col="grey40",lwd=5)
+plot.STM(model_sel,type="summary"
+         # ,custom.labels="" ,topic.names=topicNames
+         )
+
+```
+```{r}
+for (i in seq(k)){
+  cloud(model_sel, topic = i, 
+         main = labels$Topics[i]
+        # ,scale = c(2, 0.25)
+        )
+  
+}
+
+```
+
+
+# Understand
+## Labels
+```{r}
+# label topics
+# labelTopics(model_sel, c(6, 13, 18))
+labelTopics(model_sel)
+```
+## Find thoughts
+```{r}
+findThoughts(model_sel, texts = meta$ABSTRACT,n = 2, topics = 4)
+
+```
+## Estimation of effects 
+```{r}
+## Estimating metadata/topic relationships
+levels(meta$gender_final)
+out$meta$gender_final <- as.factor(out$meta$gender_final)
+
+effect_all <- estimateEffect(1:k ~ gender_final+ s(YEAR) , model_sel,
+                        documents = docs_all,
+                       metadata = out$meta, uncertainty = "Global")
+
+effect_all_2 <- estimateEffect(1:k ~ gender_final+ YEAR , model_sel,
+                        documents = docs_all,
+                       metadata = out$meta, uncertainty = "Global")
+
+effect_all_gender <- estimateEffect(1:k ~ gender_final , model_sel,
+                        documents = docs_all,
+                       metadata = out$meta, uncertainty = "Global")
+
+summary(effect_all , topics = 4)
+summary(effect_all_gender, topics = 4)
+summary(effect_all_2, topics = 4)
+
+```
+## Visualization of coefficintss
+```{r}
+plot(effect_all_gender, covariate = "gender_final", 
+     topics = c(4, 6, 18, 29),
+     model = model_sel  , 
+     method = "difference", 
+     cov.value1 = "female", cov.value2 = "male",
+     xlab = "More Male ... More Female",
+     labeltype = "custom", 
+     custom.labels = c("Bias studies (human interactions)", "Social Media",
+                       "Neural Network", "Arabic & chinese") )
+      # custom.labels = c("Bias studies (human interactions)", "Term/functions",
+      #                   "Neural Network") )
+```
+```{r}
+for (i in seq(k)){
+  plot(effect_all_gender, covariate = "gender_final", 
+     topics = i,
+     model = model_sel  , 
+     method = "difference", 
+     cov.value1 = "female", cov.value2 = "male",
+     xlab = "More Male ... More Female",
+     main =  labels$Topics[i] ,
+     labeltype = "custom", 
+     custom.labels = labels$Topics[i] )
+}
+  
+```
+
+
+## Temporal evolution
+
+```{r}
+temporal_evolution <- function(selectioned_model) {
+  for (i in seq(32)){
+    par(bty="n",lwd=2,xaxt="n")  # Get rid of the box around the plot, make the lines thicker,
+
+    plot.estimateEffect(selectioned_model,  #Topic proportions in Rep. debates
+                        covariate="YEAR",
+                        model=model_sel,
+                        topics=selectioned_model$topics[i],
+                        method="continuous",
+                        # xlab="Election Year",
+                        # ylab="Expected Topic Proportions",
+                        main=paste("Importance of", paste(labels$Topics[i])),
+                        moderator="gender_final",
+                        moderator.value="male",
+                        # ylim=c(-.1,.1),
+                        # xlim=c(1991,2022),
+                        linecol="red",
+                        printlegend=F)
+    plot.estimateEffect(selectioned_model,  #Topic proportions in Dem. debates
+                        covariate="YEAR",
+                        model=model_sel,
+                        topics=selectioned_model$topics[i],
+                        method="continuous",
+                        # xlab="Election Year",
+                        # ylab="Expected Topic Proportions",
+                        moderator="gender_final",
+                        moderator.value="female",
+                        # ylim=c(-.1,.1),
+                        linecol="blue",
+                        printlegend=F,add=T
+                        )
+    abline(h=0,lty=4,lwd=1,col="grey45")  # Put a dotted line on the y axis at 0.
+    # abline(v=c(2000,2004,2008,2012,2016),lty=2,lwd=1,col="grey45")  # Put dotted lines 
+    # on the x axis at each election year.
+    par(xaxt="s") # Tell R that it's OK to plot an x axis.
+    legend("topleft",legend=c("Male","Female"),col=c("red","blue"),
+           lty=1)
+    }  
+      }
+```
+
+
+```{r}
+temporal_evolution(effect_all)
+```
+
+```{r}
+temporal_evolution(effect_all_2)
+
+```
+## Topical content
+```{r}
+```
+
+
+### Extras
+Reviso cuanto textos en ingles hay
+```{r}
+library("textcat")
+textcat(data$ABSTRACT[1])
+en_text = data[textcat(data$ABSTRACT)=="english",]
+fr_text = data[textcat(data$ABSTRACT)=="french",]
+# ch_text = data[textcat(data$ABSTRACT)=="chinese-big5",]
+names(textcat::TC_byte_profiles)
+
+```
+
