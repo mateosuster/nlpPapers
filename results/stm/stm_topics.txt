@@ -11,7 +11,7 @@ Topics , Modelo 1 (init spectral, covariates gender & year
 10 General ML
 11 Machine Translation
 12 Frances
-13 Term/functions
+13 Term&functions
 14 Model evaluation
 15 Grammar
 16 Tools & technologies
