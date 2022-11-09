@@ -206,8 +206,8 @@ effect_all_gender <- estimateEffect(1:k ~ gender_final , model_sel,
                        metadata = out$meta, uncertainty = "Global")
 
 summary(effect_all , topics = 4)
-summary(effect_all_gender, topics = 4)
 summary(effect_all_2, topics = 4)
+summary(effect_all_gender, topics = 4)
 
 ```
 ## Visualization of coefficintss
@@ -249,13 +249,19 @@ for (i in seq(k)){
 ## Temporal evolution
 
 ```{r}
+# selectioned_model = effect_all
+# label_model = "year_continuous"
+# 
+# selectioned_model = effect_all_2
+# label_model =  "year_discrete"
+
 temporal_evolution <- function(selectioned_model, label_model) {
-  for (i in seq(32)){
+  for (i in seq(k)){
     
     etq =   labels$Topics[i]
     jpeg(file= paste0("../results/stm/estimations/temporal_evolution_of_model_with_",
                       label_model, "_on_", etq, ".jpeg") )
-    par(bty="n",lwd=2,xaxt="n")  # Get rid of the box around the plot, make the lines thicker,
+    # par(bty="n",lwd=2,xaxt="n")  # Get rid of the box around the plot, make the lines thicker,
 
     plot.estimateEffect(selectioned_model,  #Topic proportions in Rep. debates
                         covariate="YEAR",
@@ -284,12 +290,15 @@ temporal_evolution <- function(selectioned_model, label_model) {
                         linecol="blue",
                         printlegend=F,add=T
                         )
+    
     abline(h=0,lty=4,lwd=1,col="grey45")  # Put a dotted line on the y axis at 0.
-    # abline(v=c(2000,2004,2008,2012,2016),lty=2,lwd=1,col="grey45")  # Put dotted lines 
+    # abline(v=c(1990,2004,2008,2012,2016, 2022),lty=2,lwd=1,col="grey45")  # Put dotted lines
+    # axis(1,at=c(2000,2004,2008,2012,2016),labels=c(2000,2004,2008,2012,2016),las=2)
+
     # on the x axis at each election year.
     par(xaxt="s") # Tell R that it's OK to plot an x axis.
-    legend("topleft",legend=c("Male","Female"),col=c("red","blue"),
-           lty=1)
+    
+    legend("topleft",legend=c("Male","Female"),col=c("red","blue"),lty=1)
     dev.off()
     }  
       }
