@@ -306,8 +306,19 @@ temporal_evolution(effect_all_2,  "year_discrete")
 ```
 
 ## Topical content
+```{r}
+
+```
+
 
 ## Graphs
+```{r}
+mod.out.corr <- topicCorr(model_sel)
+jpeg(file= "../results/stm/graph_correlations.jpeg")
+plot(mod.out.corr)
+dev.off()
+```
+
 
 ### Extras
 Reviso cuanto textos en ingles hay
