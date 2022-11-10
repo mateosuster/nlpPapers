@@ -20,7 +20,7 @@ table(data$gender_final)
 # Data
 ```{r}
 #selected colums
-sel_col = c('YEAR'  ,   'ABSTRACT', 'gender_final'  )
+sel_col = c('YEAR'  ,  'ABSTRACT', 'gender_final'  )
 
 #sampling
 paper_sample = nrow(data[data$YEAR == 2016,] )
@@ -148,15 +148,24 @@ labels <- read.csv("../results/stm/stm_topics.txt")
 # Topic  proportion
 
 # Display Expected Topic Proportions
-# topicNames<-c("Topic 1","Topic 2","Topic 3","Topic 4","Topic 5","Topic 6",
-#           "Topic 7","Topic 8","Topic 9","Topic 10","Topic 11","Topic 12",
-#           "Topic 13","Topic 14","Topic 15","Topic 16","Topic 17",
-#           "Topic 18","Topic 19","Topic 20")
+topicNames<- c( "12 Frances", "16 Tools & technologies", "10 General ML", "18 Neural Network",
+   "27 Pre-trained language models (PLMs)", "22 Language analysis", 
+   "8 Systems & Tasks", "21 Corpus", "23 Word embeddings", 
+   "11 Machine Translation", "32 Features" , "5 NER", "20 Semantic ",
+   "14 Model evaluation", "24 Multilingual", "30 Question-answering",
+   "15 Grammar",  "2 Summarization (text generation)",
+   "26 Morphological", "19 Dialogue system", "25 Sentiment analysis",
+   "9 Sintaxis", "29 Arabic & chinese", "6 Social media", 
+   "7 Speech recognition",  "28 Discourse & news", 
+   "3 Computational linguistics", "17 Machine Comprehension", 
+   "13 Term&functions", "4 Bias studies (human interactions)", 
+   "31 Multimodal", "1 Conferences"
+)
 
-jpeg(file="../results/stm/topic_proportion.jpeg")
+jpeg(file="../results/stm/topic_proportion_labeled.jpeg")
 par(bty="n",col="grey40",lwd=5)
 plot.STM(model_sel,type="summary"
-         # ,custom.labels="" ,topic.names=topicNames
+         ,custom.labels="" ,topic.names=topicNames
          )
 dev.off()
 ```
@@ -255,11 +264,11 @@ for (i in seq(k)){
 # selectioned_model = effect_all_2
 # label_model =  "year_discrete"
 
-temporal_evolution <- function(selectioned_model, label_model) {
+temporal_evolution_gender <- function(selectioned_model, label_model) {
   for (i in seq(k)){
     
     etq =   labels$Topics[i]
-    jpeg(file= paste0("../results/stm/estimations/temporal_evolution_of_model_with_",
+    jpeg(file= paste0("../results/stm/estimations/temporal_evolution_of_model_gender_with_",
                       label_model, "_on_", etq, ".jpeg") )
     # par(bty="n",lwd=2,xaxt="n")  # Get rid of the box around the plot, make the lines thicker,
 
@@ -301,15 +310,55 @@ temporal_evolution <- function(selectioned_model, label_model) {
     legend("topleft",legend=c("Male","Female"),col=c("red","blue"),lty=1)
     dev.off()
     }  
-      }
+}
+
+temporal_evolution <- function(selectioned_model, label_model) {
+  for (i in seq(k)){
+    
+    etq =   labels$Topics[i]
+    jpeg(file= paste0("../results/stm/estimations/temporal_evolution_of_model_with_",
+                      label_model, "_on_", etq, ".jpeg") )
+    
+    plot.estimateEffect(selectioned_model,  #Topic proportions in Rep. debates
+                        covariate="YEAR",
+                        model=model_sel,
+                        topics=selectioned_model$topics[i],
+                        method="continuous",
+                        # xlab="Election Year",
+                        # ylab="Expected Topic Proportions",
+                        main=paste("Importance of", paste(labels$Topics[i])),
+                       
+                        # ylim=c(-.1,.1),
+                        # xlim=c(1991,2022),
+                        # linecol="red",
+                        printlegend=F)
+    
+    
+    abline(h=0,lty=4,lwd=1,col="grey45")  # Put a dotted line on the y axis at 0.
+    # abline(v=c(1990,2004,2008,2012,2016, 2022),lty=2,lwd=1,col="grey45")  # Put dotted lines
+    # axis(1,at=c(2000,2004,2008,2012,2016),labels=c(2000,2004,2008,2012,2016),las=2)
+
+    # on the x axis at each election year.
+    par(xaxt="s") # Tell R that it's OK to plot an x axis.
+    
+    # legend("topleft",legend=c("Male","Female"),col=c("red","blue"),lty=1)
+    dev.off()
+    }  
+}
+
+
+
+
 ```
 
 
 ```{r}
+temporal_evolution_gender(effect_all, "year_continuous")
 temporal_evolution(effect_all, "year_continuous")
 ```
 
 ```{r}
+temporal_evolution_gender(effect_all_2,  "year_discrete")
 temporal_evolution(effect_all_2,  "year_discrete")
 
 ```
@@ -322,7 +371,7 @@ temporal_evolution(effect_all_2,  "year_discrete")
 
 ## Graphs
 ```{r}
-mod.out.corr <- topicCorr(model_sel)
+mod.out.corr <- topicCorr(model_sel, cutoff = 0.1)
 jpeg(file= "../results/stm/graph_correlations.jpeg")
 plot(mod.out.corr)
 dev.off()
